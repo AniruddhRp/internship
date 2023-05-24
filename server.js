@@ -16,4 +16,4 @@ app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`server runing on port ${port}`);
-})
+});

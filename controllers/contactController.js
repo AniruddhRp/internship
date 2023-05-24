@@ -16,16 +16,26 @@ const getContacts = asyncHandler(async (req, res) => {
     console.log("The request body is :", req.body);
     const { name, email, phone } = req.body;
     if (!name || !email || !phone) {
+    
       res.status(400);
       throw new Error("All fields are mandatory !");
     }
-    const contact = await Contact.create({
+    console.log("Before create")
+    Contact.create({
       name,
       email,
       phone,
+    }).then((data) => {
+      console.log("Data created")
+      res.status(201).json(data);
+    }).catch((e) => {
+      console.log("Error")
+      console.log("####")
+      console.log(JSON.stringify(e))
+      console.log('####')
+      res.status(500).json({message: "Error"})
     });
-    console.log(contact)
-    res.status(201).json(contact);
+    
   });
   
   //@desc Get contact
